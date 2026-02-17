@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHILE HYGIENE | Cleaning Chemicals</title>
+
+<style>
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f4f7fb;
+}
+
+header {
+    background:linear-gradient(90deg,#0b4ea2,#1b78d6);
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+header h1 {
+    margin:0;
+    font-size:32px;
+}
+
+nav {
+    background:#ffc107;
+    padding:10px;
+    text-align:center;
+}
+
+nav a {
+    margin:0 15px;
+    text-decoration:none;
+    font-weight:bold;
+    color:#0b4ea2;
+}
+
+.hero {
+    padding:40px 20px;
+    text-align:center;
+    background:#e8f2ff;
+}
+
+.hero h2 {
+    color:#0b4ea2;
+}
+
+.products {
+    padding:40px 20px;
+    text-align:center;
+}
+
+.product-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card {
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+    color:#0b4ea2;
+}
+
+button {
+    background:#ffc107;
+    border:none;
+    padding:10px 15px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+button:hover {
+    background:#ffb300;
+}
+
+.cart {
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#0b4ea2;
+    color:white;
+    padding:15px;
+    border-radius:50px;
+    cursor:pointer;
+}
+
+.cart-box {
+    display:none;
+    position:fixed;
+    right:20px;
+    bottom:80px;
+    background:white;
+    width:300px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    border-radius:10px;
+}
+
+.specials {
+    background:#ffc107;
+    padding:30px;
+    text-align:center;
+}
+
+footer {
+    background:#0b4ea2;
+    color:white;
+    padding:20px;
+    text-align:center;
+    margin-top:40px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>PHILE HYGIENE</h1>
+    <p>Professional Cleaning Chemicals</p>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#products">Products</a>
+    <a href="#specials">Specials</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero">
+    <h2>High Quality Cleaning Products</h2>
+    <p>Available in 1L & 5L | Bulk Orders Available</p>
+</section>
+
+<section class="products" id="products">
+    <h2>Our Products</h2>
+
+    <div class="product-grid">
+
+        <div class="card">
+            <h3>Dishwasher</h3>
+            <p>1L - R35 | 5L - R80</p>
+            <button onclick="addToCart('Dishwasher')">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <h3>Domestos</h3>
+            <p>1L - R35 | 5L - R80</p>
+            <button onclick="addToCart('Domestos')">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <h3>Tile Cleaner</h3>
+            <p>1L - R40 | 5L - R90</p>
+            <button onclick="addToCart('Tile Cleaner')">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <h3>Pine Gel</h3>
+            <p>1L - R40</p>
+            <button onclick="addToCart('Pine Gel')">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <h3>Car Shampoo</h3>
+            <p>1L - R40 | 5L - R85</p>
+            <button onclick="addToCart('Car Shampoo')">Add to Cart</button>
+        </div>
+
+    </div>
+</section>
+
+<section class="specials" id="specials">
+    <h2>Special Offers</h2>
+    <p>1L Special: Domestos + Dishwasher + Any 2 Detergents = R140</p>
+    <p>5L Special: Buy 3 or 4 Products & Get R10 Off</p>
+    <p>Loyal Clients Get R10 Discount on Refill</p>
+</section>
+
+<div class="cart" onclick="toggleCart()">🛒 Cart</div>
+
+<div class="cart-box" id="cartBox">
+    <h3>Your Order</h3>
+    <ul id="cartItems"></ul>
+    <button onclick="checkout()">Checkout via WhatsApp</button>
+</div>
+
+<footer id="contact">
+    <p>Call / WhatsApp: 081 071 0479</p>
+    <p>Location: Koporo Street (Black Container)</p>
+    <p>© 2026 PHILE HYGIENE</p>
+</footer>
+
+<script>
+let cart = [];
+
+function addToCart(product) {
+    cart.push(product);
+    alert(product + " added to cart");
+}
+
+function toggleCart() {
+    let box = document.getElementById("cartBox");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+    displayCart();
+}
+
+function displayCart() {
+    let list = document.getElementById("cartItems");
+    list.innerHTML = "";
+    cart.forEach(item => {
+        let li = document.createElement("li");
+        li.textContent = item;
+        list.appendChild(li);
+    });
+}
+
+function checkout() {
+    let message = "Hello PHILE HYGIENE, I want to order: " + cart.join(", ");
+    window.open("https://wa.me/27810710479?text=" + encodeURIComponent(message));
+}
+</script>
+
+</body>
+</html>
